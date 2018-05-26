@@ -1,0 +1,23 @@
+{
+  "name": "Sprint-Challenge-Node-Express",
+  "version": "1.0.0",
+  "description": "Lambda School Sprint Challenge Week 20",
+  "main": "server.js",
+  "repository": "https://github.com/CSPT1-TEAMS/Sprint-Challenge-Node-Express.git",
+  "author": "Glenn-David Daniel <d2rd@outlook.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "helmet": "^3.12.1",
+    "knex": "^0.14.6",
+    "logger": "^0.0.1",
+    "sqlite3": "^4.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.3"
+  },
+  "scripts": {
+    "start": "nodemon server.js"
+  }
+}
