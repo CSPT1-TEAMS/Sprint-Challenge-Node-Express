@@ -5,6 +5,7 @@ const server = express();
 
 const dbActions = require('./data/helpers/actionModel');
 
+server.use(express.json());
 server.use(cors());
 server.use(helmet());
 
@@ -40,48 +41,47 @@ const sendUserError = (msg, res) => {
     return;
 };
 
-server.post('/api/posts', (req, res) => {
-    // console.log(req);
-    const title = req.body.title;
-    const contents = req.body.contents;
-    const newPost = { title: title, contents: contents };
-    if (!title || !contents) {
-        return sendUserError("Please provide title and contents for the post.", res)
+server.post('/api/actions', (req, res) => {
+    console.log(req.body);
+    const project_id = req.body.project_id;
+    const description = req.body.description;
+    const newAction = { project_id: project_id, description: description }
+    if (!project_id || !description) {
+        return sendUserError("Please provide the Project ID and description for the action.", res)
     }
-
-    db.insert(newPost)
-        .then(post => {
-            res.status(201).json({ post })
-            return newPost;
+    dbActions.insert(newAction)
+        .then(res => {
+            res.status(201).json({ res })
+            return newAction;
         })
         .catch(err => {
-            res.status(500).json({ error: "There was an error while saving the post to the database" })
+            res.status(500).json({ error: "There was an error while saving the action to the database" })
         })
 });
 
-server.put('/api/posts/:id', (req, res) => {
+server.put('/api/actions/:id', (req, res) => {
     const id = req.params.id;
-    const title = req.body.title;
-    const contents = req.body.contents;
-    const newPost = { title: title, contents: contents }
+    const project_id = req.body.project_id;
+    const description = req.body.description;
+    const newAction = { project_id: project_id, description: description }
 
-    if (!title || !contents) {
-        return sendUserError("Please provide title and contents for the post.", res);
+    if (!project_id || !description) {
+        return sendUserError("Please provide the Project ID and description for the action.", res);
     }
 
-    db.findById(id)
-        .then(post => {
-            console.log(post)
+    dbActions.get(id)
+        .then(action => {
+            console.log(action)
         })
         .catch(err => {
-            res.status(404).json({ message: "The post with the specified ID does not exist." })
+            res.status(404).json({ message: "The action with the specified ID does not exist." })
         });
-    db.update(id, newPost)
-        .then(post => {
-            res.status(200).json({ newPost })
+    db.update(id, newAction)
+        .then(action => {
+            res.status(200).json({ newAction })
         })    
         .catch(err => {
-            res.status(500).json({ error: "The post information could not be modified." })
+            res.status(500).json({ error: "The action information could not be modified." })
         })
 })
 
