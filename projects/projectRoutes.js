@@ -15,11 +15,30 @@ router.get('/', (req, res) => {
         })
 })
 
+// router.get('/:id', (req, res) => {
+//     db
+//         .get(req.params.id)
+//         .then(project => {
+//             res.json({ project })
+//         })
+//         .catch(error => {
+//             res.status(500).json({ error: 'This project is unavailable.' })
+//         })
+// })
+
 router.get('/:id', (req, res) => {
     db
         .get(req.params.id)
         .then(project => {
             res.json({ project })
+        })
+        .catch(error => {
+            res.status(500).json({ error: 'This project is unavailable.' })
+        })
+    db    
+        .getProjectActions(req.params.id)
+        .then(actions => {
+            res.json({ actions })
         })
         .catch(error => {
             res.status(500).json({ error: 'This project is unavailable.' })

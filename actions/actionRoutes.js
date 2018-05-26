@@ -29,10 +29,10 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
     const newAction = req.body;
-    //trying to search request for projectId
+    //trying to search request for projectId **not working**
     // projectDb
     //     .get(req.body.project_id)
-    //     .then(id => {
+    //     .then(project => {
     //         console.log("ID", id)
     //         if (project.length === 0) {
     //             res.status(400).json({error: 'Please enter a valid project id to continue.'})
