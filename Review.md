@@ -9,10 +9,10 @@ Routing and middleware
 ## What is Middleware?
 Middleware is a program that intercepts data between the client and server and does something to it.
 ## What is a Resource?
-
+A resource is an object that defines an action. The resources for this project are in the helper folder.
 ## What can the API return to help clients know if a request was successful?
 Status code 200 (and the data requested)
 ## How can we partition our application into sub-applications?
-
+We can seperate out our routes from our main server.
 ## What is CORS and why do we need it?
 CORS is a mechanism that allows the server to access resources in more than one location.

@@ -5,7 +5,7 @@ const router = express.Router();
 router.use(express.json());
 
 router.get('/', (req, res) => {
-    console.log(res.body)
+    console.log('RES', res.body)
     actionDb
         .get()
         .then(action => {
@@ -14,7 +14,18 @@ router.get('/', (req, res) => {
         .catch(error => {
             res.status(500).json({ error })
         })
+})
 
+router.get('/:id', (req, res) => {
+    console.log(req.params.id)
+    actionDb
+        .get(req.params.id)
+        .then(action => {
+            res.json({ action })
+        })
+        .catch(error => {
+            res.status(500).json({ error: 'This action is unavailable.' })
+        })
 })
 
 module.exports = router;
