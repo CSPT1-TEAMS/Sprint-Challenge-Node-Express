@@ -1,35 +1,36 @@
-
 const cors = require('cors');
 const express = require('express');
 const helmet = require('helmet');
-
 const server = express();
+
+const dbActions = require('./data/helpers/actionModel');
 
 server.use(cors());
 server.use(helmet());
-// add your server code starting here
+
 server.listen(5000, () => {
     console.log('**Server running on port 5000**');
 });
 
-server.get('/api/posts', (req, res) => {
-    db.find()
-        .then(posts => {
-            res.status(200).json({ posts })
+
+server.get('/api/actions', (req, res) => {
+    dbActions.get()
+        .then(actions => {
+            res.status(200).json({ actions })
         })
         .catch(err => {
-            res.status(500).json({ error: "The posts information could not be retrieved." })
+            res.status(500).json({ error: "The actions information could not be retrieved." })
         })
 })
 
-server.get('/api/posts/:id', (req, res) => {
-    const postId = req.params.id;
-    db.findById(postId)
-        .then(post => {
-            res.json({ post })
+server.get('/api/actions/:id', (req, res) => {
+    const actionsId = req.params.id;
+    dbActions.get(actionsId)
+        .then(actions => {
+            res.json({ actions })
         })
         .catch(err => {
-            res.status(404).json({ message: "The post with the specified ID does not exist." })
+            res.status(404).json({ message: "The action with the specified ID does not exist." })
         })
 })
 
