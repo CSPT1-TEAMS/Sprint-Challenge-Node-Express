@@ -25,6 +25,18 @@ project.get('/:id', (req, res) => {
         })
 });
 
+project.get('/:id/actions', (req, res) => {
+    const { id } = req.params;
+
+    routes.getProjectActions(id)
+        .then(actions => {
+           res.status(200).json({ actions });
+        })
+        .catch(err => {
+            res.status(204).json({ err: 'No projects at the specified ID.' });
+        })
+});
+
 project.post('/', (req, res) => {
     const { name, description } = req.body;
     const newProject = { name, description };
