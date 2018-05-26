@@ -38,4 +38,17 @@ router.post('/', (req, res) => {
         })
 })
 
+router.delete('/:id', (req, res) => {
+    const { id } = req.params;
+    let deleted;
+    db
+        .remove(id)
+        .then(deleted => {
+            res.status(201).json({ deleted })
+        })
+        .catch(error => {
+            res.status(500).json({error: 'The action could not be removed.'})
+        })
+})
+
 module.exports = router;
