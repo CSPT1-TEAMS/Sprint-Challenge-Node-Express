@@ -28,7 +28,12 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
     const newProject = req.body;
-    console.log(newProject)
+    if (!newProject.description || newProject.description.length > 128) {
+        res.status(400).json({message: 'Must include a description no longer than 128 characters.'})
+    }
+    if (!newProject.name || newProject.name.length > 128) {
+        res.status(400).json({ message: 'Must include a name no longer than 128 characters.' })
+    }
     db
         .insert(newProject)
         .then(newProject => {
