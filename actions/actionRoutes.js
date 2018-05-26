@@ -1,5 +1,6 @@
 const express = require('express');
 const db = require('../data/helpers/actionModel.js');
+const projectDb = require('../data/helpers/projectModel.js');
 
 const router = express.Router();
 router.use(express.json());
@@ -28,6 +29,15 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
     const newAction = req.body;
+    //trying to search request for projectId
+    // projectDb
+    //     .get(req.body.project_id)
+    //     .then(id => {
+    //         console.log("ID", id)
+    //         if (project.length === 0) {
+    //             res.status(400).json({error: 'Please enter a valid project id to continue.'})
+    //         }
+    //     })
     db
         .insert(newAction)
         .then(newAction => {
@@ -57,7 +67,7 @@ router.put('/:id', (req, res) => {
             res.status(201).json({ action })
         })
         .catch(error => {
-            res.status(500).json({ error: 'There was an error while updating the database'})
+            res.status(500).json({ error: 'There was an error while updating the database' })
         })
 })
 

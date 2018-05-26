@@ -29,7 +29,7 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     const newProject = req.body;
     if (!newProject.description || newProject.description.length > 128) {
-        res.status(400).json({message: 'Must include a description no longer than 128 characters.'})
+        res.status(400).json({ message: 'Must include a description no longer than 128 characters.' })
     }
     if (!newProject.name || newProject.name.length > 128) {
         res.status(400).json({ message: 'Must include a name no longer than 128 characters.' })
@@ -57,7 +57,7 @@ router.put('/:id', (req, res) => {
                 return null;
             }
         })
-    db    
+    db
         .update(id, updatedProject)
         .then(updatedProject => {
             res.status(201).json({ updatedProject })
