@@ -48,6 +48,16 @@ router.put('/:id', (req, res) => {
     const { id } = req.params;
     const updatedProject = req.body;
     db
+        .get(req.params.id)
+        .then(project => {
+            if (!project) {
+                res.status(404).json({
+                    message: "The post with the specified ID does not exist."
+                })
+                return null;
+            }
+        })
+    db    
         .update(id, updatedProject)
         .then(updatedProject => {
             res.status(201).json({ updatedProject })

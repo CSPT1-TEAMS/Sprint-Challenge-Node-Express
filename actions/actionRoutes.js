@@ -42,6 +42,16 @@ router.put('/:id', (req, res) => {
     const { id } = req.params;
     const updatedAction = req.body;
     db
+        .get(req.params.id)
+        .then(action => {
+            if (!action) {
+                res.status(404).json({
+                    message: "The action with the specified ID does not exist."
+                })
+                return null;
+            }
+        })
+    db
         .update(id, updatedAction)
         .then(action => {
             res.status(201).json({ action })
