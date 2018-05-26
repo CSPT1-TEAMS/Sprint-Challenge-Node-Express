@@ -10,7 +10,7 @@ action.get('/', (req, res) => {
             res.status(200).json({ action });
         })
         .catch(err => {
-            res.status(500).json({ err: 'Nothing.' });
+            res.status(404).json({ err: 'Nothing here, but just the wind.' });
         }) 
 });
 
@@ -22,7 +22,7 @@ action.get('/:id', (req, res) => {
             res.status(200).json({ action });
         })
         .catch(err => {
-            res.status(204).json({ err: 'Nothing.' });
+            res.status(204).json({ err: 'Nothing at the specified ID.' });
         }) 
 });
 
@@ -35,7 +35,7 @@ action.post('/', (req, res) => {
             res.status(201).json({ actionContent });
         })
         .catch(err => {
-            res.status(400).jsoon({ err: 'Could not post to server.'});
+            res.status(400).json({ err: 'Could not post to server.'});
         })
 });
 
@@ -61,7 +61,7 @@ action.delete('/:id', (req, res) => {
             res.status(202).json({ action });
         })
         .catch(err => {
-            res.status(404).json({ err: 'Nothing to delete.' });
+            res.status(400).json({ err: 'Could not delete.' });
         })
 });
 
