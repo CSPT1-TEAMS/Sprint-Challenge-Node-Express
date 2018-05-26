@@ -1,18 +1,18 @@
 {
-  "name": "Sprint-Challenge-Node-Express",
+  "name": "sprint-challenge-node-express",
   "version": "1.0.0",
   "description": "Please open the `Review.md` file and answer the questions.",
-  "main": "knexfile.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CSPT1-TEAMS/Sprint-Challenge-Node-Express.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Stephanie Brooks",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/CSPT1-TEAMS/Sprint-Challenge-Node-Express/issues"
   },
