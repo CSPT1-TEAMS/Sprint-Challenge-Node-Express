@@ -1,11 +1,15 @@
 {
   "name": "Sprint-Challenge-Node-Express",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "repository": "https://github.com/CSPT1-TEAMS/Sprint-Challenge-Node-Express.git",
   "author": "<Jesse.Reichel@live.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
   "devDependencies": {
+    "morgan": "^1.9.0",
     "nodemon": "^1.17.5"
   },
   "dependencies": {
