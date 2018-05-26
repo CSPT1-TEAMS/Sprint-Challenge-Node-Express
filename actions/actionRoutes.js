@@ -38,6 +38,19 @@ router.post('/', (req, res) => {
         })
 })
 
+router.put('/:id', (req, res) => {
+    const { id } = req.params;
+    const updatedAction = req.body;
+    db
+        .update(id, updatedAction)
+        .then(action => {
+            res.status(201).json({ action })
+        })
+        .catch(error => {
+            res.status(500).json({ error: 'There was an error while updating the database'})
+        })
+})
+
 router.delete('/:id', (req, res) => {
     const { id } = req.params;
     let deleted;
@@ -47,7 +60,7 @@ router.delete('/:id', (req, res) => {
             res.status(201).json({ deleted })
         })
         .catch(error => {
-            res.status(500).json({error: 'The action could not be removed.'})
+            res.status(500).json({ error: 'The action could not be removed.' })
         })
 })
 
