@@ -80,7 +80,7 @@ router.delete('/:id', (req, res) => {
     db.get(id)
         .then( foundProject => {
             project = {...foundProject[0] };
-            return dbprojects.remove(id);
+            return db.remove(id);
         })
         .then( () => {
             return res.status(200).json(project);
