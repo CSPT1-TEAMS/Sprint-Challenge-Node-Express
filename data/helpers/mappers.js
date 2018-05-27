@@ -5,11 +5,11 @@ module.exports = {
   actionToBody,
 };
 
-function intToBoolean(int) {
+function intToBoolean(int) { // ternary that checks for int === 1, if true converts value to boolean `true` else `int == false`
   return int === 1 ? true : false;
 }
 
-function booleanToint(bool) {
+function booleanToint(bool) { // ternary that checks for bool === `true`, if true assigns `bool  === 1` else `bool === 0`
   return bool === true ? 1 : 0;
 }
 

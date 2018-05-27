@@ -1,9 +1,14 @@
-// import modules
+// import node modules
 const express = require('express')
 const helmet = require('helmet')
 const cors = require('cors')
+// const logger = (req, res, next) => {
+//   console.log('LOGGER:', req.url);
+//   next()
+// }
 
-const db = require('./data/dbConfig.js')
+const db = require('./data/db.js')
+// const db = require('./data/dbConfig.js')
 
 // implement common error handler
 const errorHandler = (err, req, res, next) => {
@@ -13,6 +18,7 @@ const errorHandler = (err, req, res, next) => {
   }
 }
 
+// add your server code starting here
 const server = express()
 
 // apply middleware
@@ -20,71 +26,21 @@ server.use(express.json())
 server.use(cors())
 server.use(helmet())
 
+// ☞ f0591e23-f934-4eec-9079-df10d29b54bd
 // user route handlers
-/*
-module.exports = { // exports used by server as db.[functionName]()
-  server.getProjects,
-  server.getProjectById,
-  server.insertProject,
-  server.updateProject,
-  server.removeProject,
-  server.getActions,
-  server.getActionById,
-  server.insertAction,
-  server.updateAction,
-  server.removeAction
-}
-db.getProjects()
-    .then([objects1] => res.status(200).json([objects1]))
-    .catch(errorHandler => res.status(500).json({err}))
-
-  db.getProjectById()
-    .then([object1] => res.status(200).json([object1]))
-    .catch(errorHandler => res.status(500).json({err}))
-    
-  db.insertProject()
-    .then([object1] => res.status(200).json([object1]))
-    .catch(errorHandler => res.status(500).json({err}))
-    
-  db.updateProject()
-    .then([object1] => res.status(200).json([object1]))
-    .catch(errorHandler => res.status(500).json({err}))
-    
-  db.removeProject()
-    .then([object1] => res.status(200).json([object1]))
-    .catch(errorHandler => res.status(500).json({err}))
-    
-  db.getActions()
-    .then([objects2] => res.status(200).json([objects2]))
-    .catch(errorHandler => res.status(500).json({err}))
-    
-  db.getActionById()
-    .then([object2] => res.status(200).json([object2]))
-    .catch(errorHandler => res.status(500).json({err}))
-    
-  db.insertAction()
-    .then([object2] => res.status(200).json([object2]))
-    .catch(errorHandler => res.status(500).json({err}))
-    
-  db.updateAction
-    .then([object2] => res.status(200).json([object2]))
-    .catch(errorHandler => res.status(500).json({err}))
-    
-  db.removeAction
-    .then([object2] => res.status(200).json([object2]))
-    .catch(errorHandler => res.status(500).json({err}))
-    
-
-*/
-server.getProjects('/api/projects', (req, res) => {
+server.get('/api/projects', (req, res) => {
   db.getProjects() // <-- CRUD action/operation server query db
     .then(response => {
       res.status(200)
       res.json(response) // <-- finish REST operation
     })
+    .catch(err => {
+      res.status(500).json({ error: ' PROBLEM RETRIEVING DATA'
+    })
 })
 
-server.getProjectById('/api/projects', (req, res) => {
+/*
+server.get('/api/projects/:id', (req, res) => {
   const { id } = req.params
   db.getProjectById(id)
     .then(project => res.status(200).json({project: project[0]}))
@@ -134,7 +90,7 @@ server.removeProject('/api/projects', (req, res) => {
       } else {
         foundProject = projects[0]
         db.remove(id)
-          .then(numOfDeleted => { res.status(200).json(foundProject)})
+          .then(numOfDeleted => { res.status(200).json(foundProject) })
           .catch(errorHandler => res.status(500).json({ error: 'The project could not be removed' }))
       }
     })
@@ -143,8 +99,8 @@ server.removeProject('/api/projects', (req, res) => {
 
 server.getActions('/api/actions', (req, res) => {
   db.find()
-  .then(actions => res.status(200).json(actions))
-  .catch(errorHandler => res.status(500).json({err}))
+    .then(actions => res.status(200).json(actions))
+    .catch(errorHandler => res.status(500).json({err}))
 })
 
 server.getActionById('/api/actions/:id', (req, res) => {
@@ -202,6 +158,7 @@ server.removeAction('/api/actions', (req, res) => {
       }
     })
     .catch(errorHandler => res.status(500).json({ error: 'The action could not be removed' }))
+*/
 })
 
 // dot notation ==>
