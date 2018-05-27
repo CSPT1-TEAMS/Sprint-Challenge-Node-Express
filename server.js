@@ -85,36 +85,18 @@ server.put('/api/actions/:id', (req, res) => {
         })
 })
 
-// server.delete('/api/posts/:id', (req, res) => {
-//     const id = req.params.id;
-//     let post;
-//     db.findById(id)
-//         .then( foundPost => {
-//             post = foundPost;
-//             console.log(post)
-//             if (Object.keys(post).length === 0) {
-//                 return res.status(404).json({ message: "The post with the specified ID does not exist." });
-//             } else {
-//                 db.remove(id);
-//                 return res.status(200).json(post);
-//             }
-//         })
-//         .catch(err => res.status(500).json({ err }))
-// })
-
-
-server.delete('/api/posts/:id', (req, res) => {
-    const { id } = req.params.id;
+server.delete('/api/actions/:id', (req, res) => {
+    const { id } = req.params;
     dbActions.get(id)
         .then( foundAction => {
-            action = {...foundAction };
+            action = {...foundAction[0] };
             return dbActions.remove(id);
         })
         .then( () => {
-            return res.status(200).json(post);
+            return res.status(200).json(action);
         })
         .catch(err => {
-            return res.status(404).json({ message: "The post with the specified ID does not exist." })
+            return res.status(404).json({ message: "The action with the specified ID does not exist." })
         });
 })
 
