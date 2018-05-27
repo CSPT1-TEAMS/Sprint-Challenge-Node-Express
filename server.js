@@ -41,17 +41,17 @@ const sendUserError = (msg, res) => {
     return;
 };
 
-server.post('/api/actions', (req, res) => {
+server.post('/api/actions/', (req, res) => {
     console.log(req.body);
     const project_id = req.body.project_id;
     const description = req.body.description;
-    const newAction = { project_id: project_id, description: description }
+    const newAction = req.body;
     if (!project_id || !description) {
         return sendUserError("Please provide the Project ID and description for the action.", res)
     }
     dbActions.insert(newAction)
-        .then(res => {
-            res.status(201).json({ res })
+        .then(action => {
+            res.status(201).json({ action })
             return newAction;
         })
         .catch(err => {
