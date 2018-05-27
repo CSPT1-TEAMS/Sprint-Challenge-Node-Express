@@ -63,7 +63,7 @@ server.put('/api/actions/:id', (req, res) => {
     const id = req.params.id;
     const project_id = req.body.project_id;
     const description = req.body.description;
-    const newAction = { project_id: project_id, description: description }
+    const newAction = req.body;
 
     if (!project_id || !description) {
         return sendUserError("Please provide the Project ID and description for the action.", res);
@@ -76,9 +76,9 @@ server.put('/api/actions/:id', (req, res) => {
         .catch(err => {
             res.status(404).json({ message: "The action with the specified ID does not exist." })
         });
-    db.update(id, newAction)
+    dbActions.update(id, newAction)
         .then(action => {
-            res.status(200).json({ newAction })
+            res.status(200).json({ action })
         })    
         .catch(err => {
             res.status(500).json({ error: "The action information could not be modified." })
@@ -104,12 +104,11 @@ server.put('/api/actions/:id', (req, res) => {
 
 
 server.delete('/api/posts/:id', (req, res) => {
-    const { id } = req.params;
-    console.log('ID', id);
-    db.findById(id)
-        .then( foundPost => {
-            post = {...foundPost };
-            return db.remove(id);
+    const { id } = req.params.id;
+    dbActions.get(id)
+        .then( foundAction => {
+            action = {...foundAction };
+            return dbActions.remove(id);
         })
         .then( () => {
             return res.status(200).json(post);
