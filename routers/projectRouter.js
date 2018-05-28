@@ -13,7 +13,7 @@ router.get("/", (req, res, next) => {
     })
     .catch(error => {
         next({
-            status: 404,
+            status: 500,
             message: {
                 error: `Something went wrong. Please try again later.`
             }
@@ -64,7 +64,7 @@ router.post("/", (req, res, next) => {
     })
     .catch(error => {
         next({
-            status: 404,
+            status: 500,
             message: {
                 error: `Something went wrong. Please try again later.`
             }
@@ -90,7 +90,7 @@ router.delete("/:id", (req, res, next) => {
             })
             .catch(error => {
                 next({
-                    status: 404,
+                    status: 500,
                     message: {
                         error: `Something went wrong. Please try again later.`
                     }
@@ -100,7 +100,7 @@ router.delete("/:id", (req, res, next) => {
     })
     .catch(error => {
         next({
-            status: 404,
+            status: 500,
             message: {
                 error: `Something went wrong. Please try again later.`
             }
@@ -126,7 +126,7 @@ router.put("/:id", (req, res, next) => {
     })
     .catch(error => {
         next({
-            status: 404,
+            status: 500,
             message: {
                 error: `Something went wrong. Please try again later.`
             }
