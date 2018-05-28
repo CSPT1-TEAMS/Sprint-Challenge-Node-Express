@@ -1,8 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 
-const actionRoutes = require('./routes/actionRoutes');
-const projectRoutes = require('./routes/projectRoutes');
+const actionRoutes = require('./routes/actions');
+const projectRoutes = require('./routes/projects');
 
 
 const server = express();
