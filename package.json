@@ -1,0 +1,27 @@
+{
+  "name": "sprint-challenge-node-express",
+  "version": "1.0.0",
+  "description": "Word to the trizzle.",
+  "main": "knexfile.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CSPT1-TEAMS/Sprint-Challenge-Node-Express.git"
+  },
+  "author": "Sean Valdivia",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/CSPT1-TEAMS/Sprint-Challenge-Node-Express/issues"
+  },
+  "homepage": "https://github.com/CSPT1-TEAMS/Sprint-Challenge-Node-Express#readme",
+  "dependencies": {
+    "knex": "^0.14.6",
+    "sqlite3": "^4.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5"
+  }
+}
