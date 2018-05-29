@@ -16,11 +16,11 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     const projectId = req.params.id;
      projectsData.get(projectId) 
-       .then(action => {
-           res.json({ action });
+       .then(project => {
+           res.json({ project });
        })
        .catch(err => {
-           res.status(404).json({ error: `The action with id ${projectId} does not exist!` });
+           res.status(404).json({ error: `The project with id ${projectId} does not exist!` });
        })
 })
 
@@ -28,12 +28,14 @@ router.post('/', (req, res) => {
     if (!req.body.name || !req.body.description) {
         res.status(400).json({ error: "Please provide name and description for new project!" });
     }
+    
     projectsData.insert(req.body) 
       .then(response => {
           res.status(201).json({ ...req.body, ...response });
       })
       .catch(err => {
-          response.status(500).json({ err })
+           console.log(err.message);
+          res.status(500).json({ err })
       })
 })
 
