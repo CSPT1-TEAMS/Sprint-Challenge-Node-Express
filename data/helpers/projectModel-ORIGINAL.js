@@ -2,7 +2,7 @@ const db = require('../dbConfig.js');
 const mappers = require('./mappers');
 
 module.exports = {
-  getProjects: function (id) {
+  get: function (id) {
     let query = db('projects as p');
 
     if (id) {
@@ -28,19 +28,19 @@ module.exports = {
       .then(actions => actions.map(action => mappers.actionToBody(action)));
   },
 
-  insertProject: function (project) {
+  insert: function (project) {
     return db('projects')
       .insert(project)
       .then(([id]) => this.get(id));
   },
 
-  updateProject: function (id, changes) {
+  update: function (id, changes) {
     return db('projects')
       .where('id', id)
       .update(changes)
       .then(count => (count > 0 ? this.get(id) : null));
   },
-  removeProject: function (id) {
+  remove: function (id) {
     return db('projects')
       .where('id', id)
       .del();

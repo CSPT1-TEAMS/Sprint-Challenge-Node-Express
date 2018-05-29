@@ -39,63 +39,63 @@ server.get('/api/projects', (req, res) => {
     })
 })
 
-/*
 server.get('/api/projects/:id', (req, res) => {
   const { id } = req.params
   db.getProjectById(id)
-    .then(project => res.status(200).json({project: project[0]}))
-    .catch(errorHandler => res.status(500).json({ err }))
+  .then(project => res.status(200).json({project: project[0]}))
+  .catch(errorHandler => res.status(500).json({ err }))
 })
 
-server.insertProject('/api/projects', (req, res) => {
+server.post('/api/projects', (req, res) => {
   const projectBody = req.body
   if (projectBody.title === undefined || projectBody.contents === undefined) {
     return res.status(400).json({ errorMessage: 'Please provide title and contents for the project.' })
   }
   db.insert(projectBody)
-    .then(projectId => {
-      db.findById(projectId.id)
-        .then(project => res.status(201).json(project))
-        .catch(errorHandler => res.status(500).json({ error: 'There was an error while saving the project to the database' }))
-    })
+  .then(projectId => {
+    db.findById(projectId.id)
+    .then(project => res.status(201).json(project))
     .catch(errorHandler => res.status(500).json({ error: 'There was an error while saving the project to the database' }))
+  })
+  .catch(errorHandler => res.status(500).json({ error: 'There was an error while saving the project to the database' }))
 })
 
-server.updateProject('/api/projects/:id', (req, res) => {
+server.put('/api/projects/:id', (req, res) => {
   const { id } = req.params
   const projectBody = req.body
   if (projectBody.title === undefined && projectBody.contents === undefined) {
     return res.status(400).json({ errorMessage: 'Please provide title aor contents for the project.' })
   }
-
+  
   db.update(id, projectBody)
-    .then(num => {
-      if (num === 0) {
-        res.status(404).json({ message: 'The project with the specified ID does not exist.' })
-      } else {
-        db.findById(id)
-          .then(project => res.status(200).json(project))
-          .catch(errorHandler => res.status(500).json({ error: 'The project information could not be modified.' }))
-      }
-    })
-    .catch(errorHandler => res.status(500).json({ error: 'The project information could not be modified.' }))
+  .then(num => {
+    if (num === 0) {
+      res.status(404).json({ message: 'The project with the specified ID does not exist.' })
+    } else {
+      db.findById(id)
+      .then(project => res.status(200).json(project))
+      .catch(errorHandler => res.status(500).json({ error: 'The project information could not be modified.' }))
+    }
+  })
+  .catch(errorHandler => res.status(500).json({ error: 'The project information could not be modified.' }))
 })
-server.removeProject('/api/projects', (req, res) => {
+server.delete('/api/projects', (req, res) => {
   const { id } = req.params
   let foundProject
   db.findById(id)
-    .then(projects => {
-      if (projects.length === 0) {
-        res.status(404).json({ message: 'The project with the specified ID does not exist.' })
-      } else {
-        foundProject = projects[0]
-        db.remove(id)
-          .then(numOfDeleted => { res.status(200).json(foundProject) })
-          .catch(errorHandler => res.status(500).json({ error: 'The project could not be removed' }))
-      }
-    })
-    .catch(errorHandler => res.status(500).json({ error: 'The project could not be removed' }))
+  .then(projects => {
+    if (projects.length === 0) {
+      res.status(404).json({ message: 'The project with the specified ID does not exist.' })
+    } else {
+      foundProject = projects[0]
+      db.remove(id)
+      .then(numOfDeleted => { res.status(200).json(foundProject) })
+      .catch(errorHandler => res.status(500).json({ error: 'The project could not be removed' }))
+    }
+  })
+  .catch(errorHandler => res.status(500).json({ error: 'The project could not be removed' }))
 })
+/*
 
 server.getActions('/api/actions', (req, res) => {
   db.find()
