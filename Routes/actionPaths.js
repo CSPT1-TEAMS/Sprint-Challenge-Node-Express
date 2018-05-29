@@ -58,7 +58,7 @@ router.delete('/:id', (req, res) => {
     actionData.remove(id)
       .then(response => {
           if (response.length === 0) return res.status(404).json({ message: `The action with id ${id} does not exist.`});
-          res.status(200).json({ message: "=== POST DELETED ==="});
+          res.status(200).json({ message: "=== ACTION DELETED ==="});
       })
       .catch(err => {
           response.status(500).json({ error: err });
