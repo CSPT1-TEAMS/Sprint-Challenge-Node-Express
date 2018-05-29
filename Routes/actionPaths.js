@@ -37,7 +37,32 @@ router.post('/', (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
-    
+    if (!req.body.project_id || !req.body.description || !req.body.notes || !req.body.completed) {
+        res.status(400).json({ error: "Please provide project_id, description, notes, and completed (true || false) for new action!" })
+    }
+    actionData.update(req.params.id, req.body)
+      .then(response => {
+          if (response === 0) {
+              return res.status(404).json({ message: `The action with the specified ID ${req.params.id} does not exist!` });
+          }
+          res.json(response);
+      })
+      .catch(err => {
+          response.status(500).json({ message: "The action information could not be modified!" });
+      })
+})
+
+router.delete('/:id', (req, res) => {
+    const { id } = req.params;
+    let action;
+    actionData.remove(id)
+      .then(response => {
+          if (response.length === 0) return res.status(404).json({ message: `The action with id ${id} does not exist.`});
+          res.status(200).json({ message: "=== POST DELETED ==="});
+      })
+      .catch(err => {
+          response.status(500).json({ error: err });
+      })
 })
 
 
