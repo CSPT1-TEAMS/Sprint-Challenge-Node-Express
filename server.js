@@ -3,11 +3,15 @@ const express = require('express');
 const server = express();
 const port = 8000;
 
+const actionRoutes = require('./Routes/actionPaths');
+
 server.use(express.json());
+server.use('/actions', actionRoutes);
+
 
 server.get('/', (req, res) => {
     res.send(`=== SERVER RUNNING ON PORT ${port} ===`);
-    console.log("It's working!");
+    console.log("Console log working!");
 });
 
 
