@@ -37,6 +37,7 @@ server.get('/api/projects', (req, res) => {
     .catch(err => {
       res.status(500).json({ error: ' PROBLEM RETRIEVING DATA'
     })
+  })
 })
 
 server.get('/api/projects/:id', (req, res) => {
@@ -48,8 +49,9 @@ server.get('/api/projects/:id', (req, res) => {
 
 server.post('/api/projects', (req, res) => {
   const projectBody = req.body
-  if (projectBody.title === undefined || projectBody.contents === undefined) {
-    return res.status(400).json({ errorMessage: 'Please provide title and contents for the project.' })
+  if (projectBody.name === undefined || projectBody.description === undefined) {
+    return console.log(projectBody.name, projectBody.description)
+    // res.status(400).json({ errorMessage: 'Please provide name and description for the project.' })
   }
   db.insert(projectBody)
   .then(projectId => {
@@ -63,8 +65,8 @@ server.post('/api/projects', (req, res) => {
 server.put('/api/projects/:id', (req, res) => {
   const { id } = req.params
   const projectBody = req.body
-  if (projectBody.title === undefined && projectBody.contents === undefined) {
-    return res.status(400).json({ errorMessage: 'Please provide title aor contents for the project.' })
+  if (projectBody.name === undefined && projectBody.description === undefined) {
+    return res.status(400).json({ errorMessage: 'Please provide name aor description for the project.' })
   }
   
   db.update(id, projectBody)
@@ -79,6 +81,7 @@ server.put('/api/projects/:id', (req, res) => {
   })
   .catch(errorHandler => res.status(500).json({ error: 'The project information could not be modified.' }))
 })
+
 server.delete('/api/projects', (req, res) => {
   const { id } = req.params
   let foundProject
@@ -112,8 +115,8 @@ server.getActionById('/api/actions/:id', (req, res) => {
 
 server.insertAction('/api/actions', (req, res) => {
   const actionBody = req.body
-  if (actionBody.title === undefined || actionBody.contents === undefined) {
-    return res.status(400).json({ errorMessage: 'Please provide title and contents for the action.' })
+  if (actionBody.name === undefined || actionBody.description === undefined) {
+    return res.status(400).json({ errorMessage: 'Please provide name and description for the action.' })
   }
   db.insert(actionBody)
     .then(actionId => {
@@ -127,8 +130,8 @@ server.insertAction('/api/actions', (req, res) => {
 server.updateAction('/api/actions/:id', (req, res) => {
   const { id } = req.params
   const actionBody = req.body
-  if (actionBody.title === undefined && actionBody.contents === undefined) {
-    return res.status(400).json({ errorMessage: 'Please provide title aor contents for the action.' })
+  if (actionBody.name === undefined && actionBody.description === undefined) {
+    return res.status(400).json({ errorMessage: 'Please provide name aor description for the action.' })
   }
   db.update(id, actionBody)
     .then(num => {
@@ -159,7 +162,6 @@ server.removeAction('/api/actions', (req, res) => {
     })
     .catch(errorHandler => res.status(500).json({ error: 'The action could not be removed' }))
 */
-})
 
 // dot notation ==>
 
