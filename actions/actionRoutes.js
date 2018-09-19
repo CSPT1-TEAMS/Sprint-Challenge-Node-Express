@@ -16,11 +16,11 @@ router.get('/', (req, res) => {
         })
 })
 
-router.get('/:id', (req, res) => {
+router.get('/', (req, res) => {
     db
         .get(req.params.id)
         .then(action => {
-            res.json({ action })
+            res.status(200).json({ action })
         })
         .catch(error => {
             res.status(500).json({ error: 'This action is unavailable.' })
@@ -52,7 +52,7 @@ router.put('/:id', (req, res) => {
     const { id } = req.params;
     const updatedAction = req.body;
     db
-        .get(req.params.id)
+        .get(id)
         .then(action => {
             if (!action) {
                 res.status(404).json({
@@ -77,7 +77,11 @@ router.delete('/:id', (req, res) => {
     db
         .remove(id)
         .then(deleted => {
-            res.status(201).json({ deleted })
+            if (deleted !== null) {
+                res.status(201).json({ deleted })
+            } else {
+                res.status(404).json({ message: "The action with the specified ID does not exist." })
+            }
         })
         .catch(error => {
             res.status(500).json({ error: 'The action could not be removed.' })
