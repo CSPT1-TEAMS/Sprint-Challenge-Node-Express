@@ -1,0 +1,16 @@
+{
+  "name": "Sprint-Challenge-Node-Express",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/CSPT1-TEAMS/Sprint-Challenge-Node-Express",
+  "author": "Andrew Jarrett <ahrjarrett@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon server"
+    
+  },
+  "dependencies": {
+    "knex": "0.15.2",
+    "sqlite3": "4.0.3"
+  }
+}
